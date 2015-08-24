@@ -5,7 +5,7 @@ curl -L "https://atom.io/download/deb" \
   -H 'Accept: application/octet-stream' \
   -o atom.deb
 
-sudo dpkg -i ~/Downloads/atom.deb
+sudo dpkg -i atom.deb
 # mkdir atom
 # unzip -q atom.zip -d atom
 
