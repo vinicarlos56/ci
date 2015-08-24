@@ -6,7 +6,7 @@ curl -L "https://atom.io/download/deb" \
   -o atom.deb
 
 sudo apt-get install -y xorg xserver-xorg-video-dummy xinit
-echo "Section "Device"
+sudo echo 'Section "Device"
     Identifier  "Configured Video Device"
     Driver      "dummy"
 EndSection
@@ -26,7 +26,7 @@ Section "Screen"
     Depth 24
     Modes "1024x800"
     EndSubSection
-EndSection" >> /etc/X11/xorg.conf
+EndSection' >> /etc/X11/xorg.conf
 export LC_ALL="en_US.utf-8"
 export DISPLAY=:0.0
 sudo xinit & 
