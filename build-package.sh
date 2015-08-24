@@ -5,7 +5,13 @@ curl -L "https://atom.io/download/deb" \
   -H 'Accept: application/octet-stream' \
   -o atom.deb
 
+sudo apt-get install -y xorg 
+sudo apt-get install -y xinit 
+export LC_ALL="en_US.utf-8"
+export DISPLAY=:0.0
+sudo xinit & 
 sudo dpkg -i atom.deb
+sudo apt-get -f -y install
 # mkdir atom
 # unzip -q atom.zip -d atom
 
@@ -26,7 +32,7 @@ TEST_PACKAGES="${APM_TEST_PACKAGES:=none}"
 if [ "$TEST_PACKAGES" != "none" ]; then
   echo "Installing atom package dependencies..."
   for pack in $TEST_PACKAGES ; do
-    # atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm install $pack
+    # atom/Aom.app/Contents/Resources/app/apm/node_modules/.bin/apm install $pack
     apm install $pack
   done
 fi
