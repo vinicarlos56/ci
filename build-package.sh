@@ -1,27 +1,33 @@
 #!/bin/sh
 
 echo "Downloading latest Atom release..."
-curl -s -L "https://atom.io/download/mac" \
+curl -L "https://atom.io/download/deb" \
   -H 'Accept: application/octet-stream' \
-  -o atom.zip
+  -o atom.deb
 
-mkdir atom
-unzip -q atom.zip -d atom
-export PATH=$PWD/atom/Atom.app/Contents/Resources/app/apm/bin:$PATH
+sudo dpkg -i ~/Downloads/atom.deb
+# mkdir atom
+# unzip -q atom.zip -d atom
+
+# export PATH=$PWD/atom/Atom.app/Contents/Resources/app/apm/bin:$PATH
 
 echo "Using Atom version:"
-ATOM_PATH=./atom ./atom/Atom.app/Contents/Resources/app/atom.sh -v
+atom -v
+# ATOM_PATH=./atom ./atom/Atom.app/Contents/Resources/app/atom.sh -v
 
 echo "Downloading package dependencies..."
-atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm clean
-atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm install
+apm clean
+apm install
+# atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm clean
+# atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm install
 
 TEST_PACKAGES="${APM_TEST_PACKAGES:=none}"
 
 if [ "$TEST_PACKAGES" != "none" ]; then
   echo "Installing atom package dependencies..."
   for pack in $TEST_PACKAGES ; do
-    atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm install $pack
+    # atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm install $pack
+    apm install $pack
   done
 fi
 
@@ -65,6 +71,7 @@ if [ -f ./node_modules/.bin/standard ]; then
 fi
 
 echo "Running specs..."
-ATOM_PATH=./atom atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm test --path atom/Atom.app/Contents/Resources/app/atom.sh
+# ATOM_PATH=./atom atom/Atom.app/Contents/Resources/app/apm/node_modules/.bin/apm test --path atom/Atom.app/Contents/Resources/app/atom.sh
+apm test
 
 exit
