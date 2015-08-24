@@ -5,8 +5,7 @@ curl -L "https://atom.io/download/deb" \
   -H 'Accept: application/octet-stream' \
   -o atom.deb
 
-sudo apt-get install -y xorg 
-sudo apt-get install -y xinit 
+sudo apt-get install -y xorg xserver-xorg-video-dummy xinit
 export LC_ALL="en_US.utf-8"
 export DISPLAY=:0.0
 sudo xinit & 
