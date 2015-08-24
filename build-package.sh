@@ -5,12 +5,12 @@ curl -L "https://atom.io/download/deb" \
   -H 'Accept: application/octet-stream' \
   -o atom.deb
 
-sudo apt-get install -y xorg xserver-xorg-video-dummy xinit
-sudo X -configure
-sudo mv xorg.conf.new /etc/X11/xorg.conf
-export LC_ALL="en_US.utf-8"
 export DISPLAY=:0.0
-sudo xinit & 
+sudo apt-get install -y xorg xserver-xorg-video-dummy
+wget http://www.eecs.berkeley.edu/~pullin/travis/xorg.conf
+sudo Xorg -noreset -logfile ./0.log -config ./xorg.conf :0 &
+# export LC_ALL="en_US.utf-8"
+# sudo xinit & 
 sudo dpkg -i atom.deb
 sudo apt-get -f -y install
 # mkdir atom
